@@ -21,3 +21,22 @@ nav {
   margin-left: auto;
   text-align: right;
 }
+
+#nav-items a{
+  margin: 0 2px;
+  padding: 1px 5px;
+  font-size: 0.8rem;
+}
+#nav-items a:hover{
+  font-weight: bold;
+}
+#nav-items a.active, 
+#nav-items a.active:hover{
+  font-size:0.9rem;
+  margin-left: 5px;
+  background-color: orange;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: default;
+  text-decoration: none;
+}

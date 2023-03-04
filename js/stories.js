@@ -81,6 +81,7 @@ async function addNewStory(evt){
 
 $newPostForm.on("submit", addNewStory)
 
+//Creates list of only favorites to show on the page
 function putFavoritesOnPage(){
   console.debug("putFavoritesOnPage");
 
@@ -101,7 +102,27 @@ function putFavoritesOnPage(){
   $favStories.show();
 }
 
+//Creates list of only favorites to show on the page
+function putMyStoriesOnPage(){
+  console.debug("putMyStoriesOnPage");
 
+  $myStories.empty();
+
+  // loop through all of our stories and generate HTML for them
+  if(!currentUser.ownStories.length){
+    $myStories.append("<h3>You have not posted any stories yet!</h3>")
+  }
+  else{
+    //Generate HTML for favs
+    for (let story of currentUser.ownStories) {
+      const $story = generateStoryMarkup(story);
+      $myStories.append($story);
+    }
+  }
+  $myStories.show();
+}
+
+//Creates HTML for favorite symbol
 function getfavSymbHTML(story, user){
   const isFav = user.isFav(story);
   const favSymb = isFav ? "solid" : "regular";
@@ -112,13 +133,14 @@ function getfavSymbHTML(story, user){
     return rText;
 }
 
+
+//Toggles favIcon and updates user's favorites in API
 async function toggleFav(evt){
   // console.debug('toggleFav');
   
   const $target = $(evt.target);
   const storyId = $target.closest("li").attr("id");
   const story = storyList.stories.find(s => s.storyId === storyId);
-
   
   //Update API
   if($target.hasClass("fa-solid")){
