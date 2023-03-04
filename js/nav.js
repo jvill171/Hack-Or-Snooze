@@ -18,6 +18,7 @@ function navSubmitClick(evt){
   console.debug("navSubmitClick", evt);
   toggleActiveNav(evt.target);
   hidePageComponents();
+  putStoriesOnPage();
   $newPostForm.show();
   $allStoriesList.show();
 }

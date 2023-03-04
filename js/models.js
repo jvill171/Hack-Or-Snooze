@@ -88,6 +88,23 @@ class StoryList {
 
     return story;
   }
+
+
+  async removeStory(user, storyId) {
+    const token = user.loginToken;
+    await axios.delete(
+      `${BASE_URL}/stories/${storyId}`,
+      {
+        data:{token}
+      } 
+    );
+    
+    //Refresh [story list, my stories, favorites] section to exclude deleted story
+    this.stories = this.stories.filter(story => story.storyId !== storyId);
+    user.ownStories = user.ownStories.filter(story => story.storyId !== storyId);
+    user.favorites = user.favorites.filter(story => story.storyId !== storyId);
+}
+
 }
 
 

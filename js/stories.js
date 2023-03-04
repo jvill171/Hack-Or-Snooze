@@ -25,13 +25,17 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
 
   //If user logged in - show favSymb
-  const favSymb = Boolean(currentUser);
-  console.log(favSymb)
-
+  const isSignedIn = Boolean(currentUser);
+  //If active section is myStories
+  const isMyStories = $('.active').closest('a').attr("id") === "navbar-myStories";
+  
   return $(`
       <li id="${story.storyId}">
         </div>  
-          ${favSymb ? getfavSymbHTML(story, currentUser) : ""}
+        ${
+          isSignedIn ?
+            (isMyStories ? getDeleteHTML(): getfavSymbHTML(story, currentUser)) : ""
+        }
           <a href="${story.url}" target="a_blank" class="story-link">
             ${story.title}
           </a>
@@ -79,7 +83,25 @@ async function addNewStory(evt){
   
 }
 
-$newPostForm.on("submit", addNewStory)
+$newPostForm.on("submit", addNewStory);
+
+//Delete current user's specific story
+async function deleteStory(evt){
+  console.debug("deleteStory");
+  const storyId = $(evt.target)
+      .closest("li")
+      .attr("id");
+
+  //Delete story from API
+  console.log(storyList)
+  await storyList.removeStory(currentUser, storyId);
+  console.log(storyList)
+
+  //Reload section to exclude deleted story
+  await putMyStoriesOnPage();
+}
+
+$myStories.on("click",".fa-trash-can", deleteStory)
 
 //Creates list of only favorites to show on the page
 function putFavoritesOnPage(){
@@ -115,7 +137,7 @@ function putMyStoriesOnPage(){
   else{
     //Generate HTML for favs
     for (let story of currentUser.ownStories) {
-      const $story = generateStoryMarkup(story);
+      const $story = generateStoryMarkup(story, true);
       $myStories.append($story);
     }
   }
@@ -128,9 +150,18 @@ function getfavSymbHTML(story, user){
   const favSymb = isFav ? "solid" : "regular";
   const rText =
     `<span class="favSymb">
-    <i class="fa-${favSymb} fa-heart"></i>
+    <i class="fa-${favSymb} fa-star"></i>
   </span>`;
     return rText;
+}
+
+//Creates HTML for delete symbol
+function getDeleteHTML(){
+  const rText = 
+    `<span class="delSymb">
+    <i class="fa-regular fa-trash-can"></i>
+  </span>`;
+  return rText;
 }
 
 
@@ -154,3 +185,4 @@ async function toggleFav(evt){
 }
 
 $allStoriesList.on("click",'.favSymb',toggleFav)
+$favStories.on("click",'.favSymb',toggleFav)

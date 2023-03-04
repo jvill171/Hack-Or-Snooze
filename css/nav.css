@@ -24,7 +24,7 @@ nav {
 
 #nav-items a{
   margin: 0 2px;
-  padding: 1px 5px;
+  padding: 0 5px;
   font-size: 0.8rem;
 }
 #nav-items a:hover{
