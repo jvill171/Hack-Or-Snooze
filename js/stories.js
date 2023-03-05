@@ -31,7 +31,7 @@ function generateStoryMarkup(story) {
   
   return $(`
       <li id="${story.storyId}">
-        </div>  
+        <div>  
         ${
           isSignedIn ?
             (isMyStories ? getDeleteHTML(): getfavSymbHTML(story, currentUser)) : ""
@@ -40,8 +40,8 @@ function generateStoryMarkup(story) {
             ${story.title}
           </a>
           <small class="story-hostname">(${hostName})</small>
-          <small class="story-author">by ${story.author}</small>
-          <small class="story-user">posted by ${story.username}</small>
+          <div class="story-author">by ${story.author}</div>
+          <div class="story-user">posted by ${story.username}</div>
         </div>
       </li>
     `);
@@ -93,9 +93,7 @@ async function deleteStory(evt){
       .attr("id");
 
   //Delete story from API
-  console.log(storyList)
   await storyList.removeStory(currentUser, storyId);
-  console.log(storyList)
 
   //Reload section to exclude deleted story
   await putMyStoriesOnPage();

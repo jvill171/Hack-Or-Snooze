@@ -8,6 +8,8 @@
   color: gray;
   font-size: 0.8rem;
   margin: 10px 0;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  padding-bottom: 10px;
 }
 
 #stories-loading-msg {
@@ -31,11 +33,13 @@
 }
 
 .story-author {
-  margin-left: 2em;
+  color:green;
+  margin:5px 0;
 }
 
 .story-user {
   display: block;
+  color: orange;
 }
 
 .fa-solid:hover, 
@@ -50,7 +54,10 @@
 .fa-trash-can:hover{
   color: red;
 }
-/* 
+
+/**********************************
+    I think this looks better
+*********************************
 .fa-regular, .fa-solid:hover:active{
   color: orange;
 }
@@ -58,3 +65,15 @@
 .fa-solid, .fa-regular:hover:active, .fa-trash-can{
   color: red;
 } */
+
+li div > div{
+  font-size: 0.8rem;
+}
+
+/* Small mobile users - 
+leave less space on left side of story lists */
+@media screen and (max-width: 576px) {
+  ol{
+    padding:0 40px;
+  }
+}

@@ -9,7 +9,11 @@ nav {
 }
 
 .navbar-brand {
+  font-size:1.2rem;
+  letter-spacing: -1px;
+  scale: 105%;
   font-weight: bold;
+  margin: 0 10px 0 0;
 }
 
 .nav-link {
@@ -22,9 +26,10 @@ nav {
   text-align: right;
 }
 
+#nav-items{
+  font-weight: bold;
+}
 #nav-items a{
-  margin: 0 2px;
-  padding: 0 5px;
   font-size: 0.8rem;
 }
 #nav-items a:hover{
@@ -34,9 +39,13 @@ nav {
 #nav-items a.active:hover{
   font-size:0.9rem;
   margin-left: 5px;
+  padding:0 3px;
   background-color: orange;
   font-weight: bold;
   border-radius: 5px;
   cursor: default;
   text-decoration: none;
+}
+nav > *{
+  margin: 20px 0;
 }

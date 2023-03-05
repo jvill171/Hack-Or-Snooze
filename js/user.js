@@ -41,11 +41,17 @@ async function signup(evt) {
 
   // User.signup retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
-  currentUser = await User.signup(username, password, name);
+  try{
+    currentUser = await User.signup(username, password, name);
 
-  saveUserCredentialsInLocalStorage();
-  updateUIOnUserLogin();
-
+    saveUserCredentialsInLocalStorage();
+    updateUIOnUserLogin();
+  }
+  catch(err){
+    if(err.response.status === 409){
+      alert("This username has already been taken!");
+    }
+  }
   $signupForm.trigger("reset");
 }
 
