@@ -135,7 +135,7 @@ function putMyStoriesOnPage(){
   else{
     //Generate HTML for favs
     for (let story of currentUser.ownStories) {
-      const $story = generateStoryMarkup(story, true);
+      const $story = generateStoryMarkup(story);
       $myStories.append($story);
     }
   }

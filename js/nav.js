@@ -49,6 +49,17 @@ function navMyStoriesClick(evt){
 
 $body.on("click", "#navbar-myStories", navMyStoriesClick)
 
+//User profile, selected by clicking username
+function navProfileClick(evt){
+  console.debug("navProfileClick", evt);
+  toggleActiveNav(evt.target);
+  hidePageComponents();
+  updateProfileHTML();
+  $profileForm.show();
+}
+
+$body.on("click", "#nav-user-profile", navProfileClick)
+
 /** Show main list of all stories when click site name */
 
 function navAllStories(evt) {

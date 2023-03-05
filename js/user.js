@@ -122,3 +122,64 @@ function updateUIOnUserLogin() {
 
   updateNavOnLogin();
 }
+
+//Updates displayed Username/Name to display current username/name
+function updateProfileHTML(){
+  console.debug("updateProfileHTML")
+  const $profileUsername = 
+    $("<span>").text(`${currentUser.username}`)
+      .css("font-weight", "normal");
+  
+      $('#profile-username').text(`Username: `).append($profileUsername)
+
+  $('#profile-curName').text(`Current name: `)
+    .append($("<span>").text(`${currentUser.name}`)
+    .css("font-weight", "normal"));
+}
+
+//Update Name on profile
+async function updateName(){
+  console.debug("updateName")
+  const newName = $("#new-name").val();
+  
+  //Update displayed name only after API has been updated
+  let nameUpdate = await currentUser.updateUserData("name", newName);
+  if(!nameUpdate){
+    updateProfileHTML();
+    $("#new-name").val("");
+  }
+}
+
+$body.on("click", '#update-name-btn', updateName)
+
+//Update Password on profile
+function updatePassword(){
+  console.debug("updatePassword")
+  
+  const newPass = $("#new-password").val();
+  const confirmPass = $("#confirm-password").val();
+  
+  //One or Both password fields are empty
+  if( newPass === '' || confirmPass === ''){
+    alert("Please fill out both PASSWORD and CONFIRM fields with a matching password.")
+  }
+  //Passwords DO match
+  else if(newPass === confirmPass){
+    if(newPass.length < 4){
+      alert("Password must be at least 4 characters long!")
+    }
+    else{
+      currentUser.updateUserData("password", newPass);
+      $("#new-password").val("");
+      $("#confirm-password").val("");
+      alert("Password updated!");
+    }
+  }
+  //Passwords DONT match
+  else{
+    alert("PASSWORD and CONFIRM must be matching passwords.")
+  }
+  
+}
+
+$body.on("click", '#update-password-btn', updatePassword)

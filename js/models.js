@@ -252,4 +252,23 @@ class User {
   isFav(story) {
     return this.favorites.some(inStory => (inStory.storyId === story.storyId));
   }
+
+  
+//Update name or password, specified by toChange
+async updateUserData(toChange, changeData){
+  const token = this.loginToken;
+
+  const res = await axios.patch(
+    `${BASE_URL}/users/${this.username}`,{
+      token: token,
+      user:{
+        [`${toChange.toLowerCase()}`]:changeData,
+      }
+    })
+
+  //Update User class's name, if successful response
+  if(toChange.toLowerCase() === "name" && res.status === 200){
+    this.name = changeData;
+  }
+}
 }

@@ -12,6 +12,7 @@ const $myStories = $("#my-stories");
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
 const $newPostForm = $("#newPost-form");
+const $profileForm = $("#profile-form");
 
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
@@ -30,6 +31,7 @@ function hidePageComponents() {
     $loginForm,
     $signupForm,
     $newPostForm,
+    $profileForm,
   ];
   components.forEach(c => c.hide());
 }
