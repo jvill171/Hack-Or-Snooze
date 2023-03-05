@@ -148,7 +148,7 @@ function getfavSymbHTML(story, user){
   const favSymb = isFav ? "solid" : "regular";
   const rText =
     `<span class="favSymb">
-    <i class="fa-${favSymb} fa-star"></i>
+    <i class="fa-${favSymb} fa-heart"></i>
   </span>`;
     return rText;
 }

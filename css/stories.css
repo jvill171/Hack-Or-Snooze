@@ -47,17 +47,18 @@
     cursor: pointer;
     scale:120%;
 }
-.fa-solid, .fa-regular{
+
+/* .fa-solid, .fa-regular{
   color:gray
 }
 
 .fa-trash-can:hover{
   color: red;
-}
+} */
 
 /**********************************
     I think this looks better
-*********************************
+*********************************/
 .fa-regular, .fa-solid:hover:active{
   color: orange;
 }
