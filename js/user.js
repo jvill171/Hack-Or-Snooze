@@ -116,6 +116,7 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
   hidePageComponents(); //Hide login form after login
+  putStoriesOnPage();
   $("#nav-items").show();
   $allStoriesList.show();
 
